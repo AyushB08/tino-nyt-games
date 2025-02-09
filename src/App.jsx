@@ -8,6 +8,8 @@ import SettingModal from 'components/SettingModal';
 import StatsModal from 'components/StatsModal';
 import useLocalStorage from 'hooks/useLocalStorage';
 import useAlert from 'hooks/useAlert';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { AuthProvider } from 'context/AuthContext';
 import {
   solution,
   solutionIndex,
@@ -155,51 +157,55 @@ function App() {
   };
 
   return (
-    <div className={styles.container}>
-      <Header
-        setIsInfoModalOpen={setIsInfoModalOpen}
-        setIsStatsModalOpen={setIsStatsModalOpen}
-        setIsSettingsModalOpen={setIsSettingsModalOpen}
-      />
-      <Alert />
-      <Grid
-        currentGuess={currentGuess}
-        guesses={guesses}
-        isJiggling={isJiggling}
-        setIsJiggling={setIsJiggling}
-      />
-      <Keyboard
-        onEnter={handleEnter}
-        onDelete={handleDelete}
-        onKeyDown={handleKeyDown}
-        guesses={guesses}
-      />
-      <InfoModal
-        isOpen={isInfoModalOpen}
-        onClose={() => setIsInfoModalOpen(false)}
-      />
-      <SettingModal
-        isOpen={isSettingsModalOpen}
-        onClose={() => setIsSettingsModalOpen(false)}
-        isHardMode={isHardMode}
-        isDarkMode={isDarkMode}
-        isHighContrastMode={isHighContrastMode}
-        setIsHardMode={handleHardMode}
-        setIsDarkMode={handleDarkMode}
-        setIsHighContrastMode={handleHighContrastMode}
-      />
-      <StatsModal
-        isOpen={isStatsModalOpen}
-        onClose={() => setIsStatsModalOpen(false)}
-        gameStats={stats}
-        numberOfGuessesMade={guesses.length}
-        isGameWon={isGameWon}
-        isGameLost={isGameLost}
-        isHardMode={isHardMode}
-        guesses={guesses}
-        showAlert={showAlert}
-      />
-    </div>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+      <AuthProvider>
+        <div className={styles.container}>
+          <Header
+            setIsInfoModalOpen={setIsInfoModalOpen}
+            setIsStatsModalOpen={setIsStatsModalOpen}
+            setIsSettingsModalOpen={setIsSettingsModalOpen}
+          />
+          <Alert />
+          <Grid
+            currentGuess={currentGuess}
+            guesses={guesses}
+            isJiggling={isJiggling}
+            setIsJiggling={setIsJiggling}
+          />
+          <Keyboard
+            onEnter={handleEnter}
+            onDelete={handleDelete}
+            onKeyDown={handleKeyDown}
+            guesses={guesses}
+          />
+          <InfoModal
+            isOpen={isInfoModalOpen}
+            onClose={() => setIsInfoModalOpen(false)}
+          />
+          <SettingModal
+            isOpen={isSettingsModalOpen}
+            onClose={() => setIsSettingsModalOpen(false)}
+            isHardMode={isHardMode}
+            isDarkMode={isDarkMode}
+            isHighContrastMode={isHighContrastMode}
+            setIsHardMode={handleHardMode}
+            setIsDarkMode={handleDarkMode}
+            setIsHighContrastMode={handleHighContrastMode}
+          />
+          <StatsModal
+            isOpen={isStatsModalOpen}
+            onClose={() => setIsStatsModalOpen(false)}
+            gameStats={stats}
+            numberOfGuessesMade={guesses.length}
+            isGameWon={isGameWon}
+            isGameLost={isGameLost}
+            isHardMode={isHardMode}
+            guesses={guesses}
+            showAlert={showAlert}
+          />
+        </div>
+      </AuthProvider>
+    </GoogleOAuthProvider>
   );
 }
 
