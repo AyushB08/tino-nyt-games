@@ -2,12 +2,16 @@ import { MAX_CHALLENGES } from 'constants/settings';
 import { VALID_GUESSES } from 'constants/validGuesses';
 import { WORDS } from 'constants/wordList';
 
+/*
 export const isWordValid = word => {
   return (
     VALID_GUESSES.includes(word.toLowerCase()) ||
-    WORDS.includes(word.toLowerCase())
+    WORDS.includes(word.toLowerCase()) 
   );
 };
+*/
+
+export const isWordValid = () => true;
 
 export const getGuessStatuses = guess => {
   const splitGuess = guess.toLowerCase().split('');
@@ -179,9 +183,16 @@ export const getWordOfDay = () => {
   const nextday = (index + 1) * msInDay + epochMs;
 
   return {
+    /*
     solution: WORDS[index % WORDS.length],
     solutionIndex: index,
     tomorrow: nextday,
+    */
+    
+    solution: "purva", 
+    solutionIndex: 0,  
+    tomorrow: Date.now() 
+    
   };
 };
 
