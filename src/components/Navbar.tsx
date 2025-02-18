@@ -29,7 +29,7 @@ const Navbar = () => {
               Wordle
             </Link>
             <Link to="/connections" className="text-gray-700 hover:text-gray-900">
-              Connection
+              Connections
             </Link>
           </div>
 
