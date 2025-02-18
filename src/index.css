@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f8f8;
+  margin: 0;
+}
+
+.connections-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.connections-title {
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.connections-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.connections-tile {
+  background: #eee;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.connections-tile.selected {
+  background: #666;
+  transform: scale(1.03);
+}
+
+.completed-group {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: fadeIn 0.5s forwards;
+}
+
+.completed-title {
+  grid-column: span 4;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.connections-attempts-container {
+  margin-top: 10px;
+}
+
+.connections-dot {
+  height: 12px;
+  width: 12px;
+  background-color: black;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 2px;
+}
+
+.wordle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.wordle-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.board-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.wordle-tile {
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 2px solid #d3d6da;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: all 0.5s;
+}
+
+.wordle-tile.filled {
+  border-color: #878a8c;
+}
+
+.wordle-tile.correct {
+  background-color: #6aaa64;
+  border-color: #6aaa64;
+  color: white;
+}
+
+.wordle-tile.present {
+  background-color: #c9b458;
+  border-color: #c9b458;
+  color: white;
+}
+
+.wordle-tile.absent {
+  background-color: #787c7e;
+  border-color: #787c7e;
+  color: white;
+}
+
+.invalid-message {
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+.game-message {
+  font-size: 1.25rem;
+  font-weight: bold;
+ 
+}
+
+.button-container {
+  margin-top: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  margin: 5px;
+  background: #444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.new-game-button {
+  padding: 0.5rem 1rem;
+  background-color: #db2929;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.new-game-button:hover {
+  background-color: #f60808;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
