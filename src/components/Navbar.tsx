@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { Link } from 'react-router-dom';
-import { useGoogleLogin, GoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin} from '@react-oauth/google';
 import tinovationLogo from '../assets/tinovation-logo.png';
 
 const Navbar = () => {
