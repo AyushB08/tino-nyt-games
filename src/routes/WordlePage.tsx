@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import './Wordle.css';
 
 const WORD_LENGTH = 5;
 const MAX_GUESSES = 6;
@@ -101,7 +100,7 @@ const WordleGame = () => {
               return (
                 <div
                   key={colIndex}
-                  className={`tile ${letter ? 'filled' : ''} ${getLetterStatus(letter, colIndex, rowIndex)}`}
+                  className={`wordle-tile ${letter ? 'filled' : ''} ${getLetterStatus(letter, colIndex, rowIndex)}`}
                 >
                   {letter}
                 </div>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './styles.css';
 
 type Group = {
   name: string;
@@ -60,11 +59,11 @@ const ConnectionsPage: React.FC = () => {
   };
 
   const renderGrid = (): React.ReactElement => (
-    <div className="grid">
+    <div className="connections-grid">
       {tiles.map((word, index) => (
         <div
           key={index}
-          className={`tile ${selectedTiles.includes(word) ? 'selected' : ''}`}
+          className={`connections-tile ${selectedTiles.includes(word) ? 'selected' : ''}`}
           onClick={() => selectTile(word)}
         >
           {word}
@@ -79,7 +78,7 @@ const ConnectionsPage: React.FC = () => {
         <div key={index} className="completed-group" style={{ background: group.color }}>
           <div className="completed-title">{group.name}</div>
           {group.words.map((word, idx) => (
-            <div key={idx} className="tile">
+            <div key={idx} className="connections-tile">
               {word}
             </div>
           ))}
@@ -91,14 +90,14 @@ const ConnectionsPage: React.FC = () => {
   const renderAttempts = (): React.ReactElement => (
     <div id="attempts-container">
       {[...Array(attemptsLeft)].map((_, index) => (
-        <div key={index} className="dot"></div>
+        <div key={index} className="connections-dot"></div>
       ))}
     </div>
   );
 
   return (
-    <div className="game-container">
-      <div className="title">TinoConnections</div>
+    <div className="connections-container">
+      <div className="connections-title">TinoConnections</div>
       {renderCompletedGroups()}
       {renderGrid()}
       <div className="button-container">
