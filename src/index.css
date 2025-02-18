@@ -151,7 +151,7 @@ body {
 .game-message {
   font-size: 1.25rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+ 
 }
 
 .button-container {
@@ -170,7 +170,7 @@ body {
 
 .new-game-button {
   padding: 0.5rem 1rem;
-  background-color: #3b82f6;
+  background-color: #db2929;
   color: white;
   border: none;
   border-radius: 0.25rem;
@@ -180,7 +180,7 @@ body {
 }
 
 .new-game-button:hover {
-  background-color: #2563eb;
+  background-color: #f60808;
 }
 
 @keyframes shake {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 const WORD_LENGTH = 5;
 const MAX_GUESSES = 6;
-const VALID_WORDS = ['REACT', 'REDUX', 'HOOKS', 'STATE', 'PROPS', 'CLASS', 'MOUNT'];
+const VALID_WORDS = ['TESTS', 'APPLE', "TASER"];
 
 const WordleGame = () => {
   const [targetWord, setTargetWord] = useState('');
@@ -64,15 +64,20 @@ const WordleGame = () => {
       setGameStatus('lost');
     } else {
       setCurrentRow((prev) => prev + 1);
+      setCurrentGuess('');
     }
     
-    setCurrentGuess('');
+    
   };
 
   const getLetterStatus = (letter: string, position: number, rowIndex: number) => {
     if (rowIndex > currentRow) return '';
     if (!guesses[rowIndex]) return '';
-
+  
+    if (gameStatus === 'won' && rowIndex === currentRow) {
+      return 'correct'; 
+    }
+  
     if (targetWord[position] === letter) {
       return 'correct';
     }
@@ -81,6 +86,7 @@ const WordleGame = () => {
     }
     return 'absent';
   };
+  
 
   return (
     <div className="wordle-container">
