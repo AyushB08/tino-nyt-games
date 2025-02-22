@@ -160,65 +160,67 @@ const WordleGame: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-6 p-4">
-      <Popup message={popupMessage} isVisible={showPopup} />
-      
-      <div className="grid gap-1">
-        {Array(MAX_GUESSES).fill(null).map((_, rowIndex) => (
-          <div 
-            key={rowIndex}
-            className={`grid grid-cols-5 gap-1 ${rowIndex === currentRow && shake ? 'animate-shake' : ''}`}
-          >
-            {Array(WORD_LENGTH).fill(null).map((_, colIndex) => {
-              const letter = rowIndex === currentRow 
-                ? currentGuess[colIndex] 
-                : guesses[rowIndex]?.[colIndex];
-              const status = getLetterStatus(letter || '', colIndex, rowIndex);
-              
-              return (
-                <div
-                  key={colIndex}
-                  className={`
-                    w-14 h-14 border-2 flex items-center justify-center text-2xl font-bold
-                    ${!letter ? 'border-gray-300' : 'border-gray-400'}
-                    ${status === 'correct' ? 'bg-green-500 text-white border-green-500' : ''}
-                    ${status === 'present' ? 'bg-yellow-500 text-white border-yellow-500' : ''}
-                    ${status === 'absent' ? 'bg-gray-600 text-white border-gray-600' : ''}
-                  `}
-                >
-                  {letter}
-                </div>
-              );
-            })}
-          </div>
-        ))}
-      </div>
+    <div className=" flex items-center justify-center h-full">
+      <div className="flex flex-col items-center gap-4 p-4 max-h-screen">
+        <Popup message={popupMessage} isVisible={showPopup} />
+        
+        <div className="grid gap-1">
+          {Array(MAX_GUESSES).fill(null).map((_, rowIndex) => (
+            <div 
+              key={rowIndex}
+              className={`grid grid-cols-5 gap-1 ${rowIndex === currentRow && shake ? 'animate-shake' : ''}`}
+            >
+              {Array(WORD_LENGTH).fill(null).map((_, colIndex) => {
+                const letter = rowIndex === currentRow 
+                  ? currentGuess[colIndex] 
+                  : guesses[rowIndex]?.[colIndex];
+                const status = getLetterStatus(letter || '', colIndex, rowIndex);
+                
+                return (
+                  <div
+                    key={colIndex}
+                    className={`
+                      w-12 h-12 border-2 flex items-center justify-center text-xl font-bold
+                      ${!letter ? 'border-gray-300' : 'border-gray-400'}
+                      ${status === 'correct' ? 'bg-green-500 text-white border-green-500' : ''}
+                      ${status === 'present' ? 'bg-yellow-500 text-white border-yellow-500' : ''}
+                      ${status === 'absent' ? 'bg-gray-600 text-white border-gray-600' : ''}
+                    `}
+                  >
+                    {letter}
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
 
-      <div className="w-full max-w-xl mt-4">
-        {KEYBOARD_ROWS.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex justify-center gap-1 mb-1">
-            {row.map((key) => {
-              const status = usedLetters[key];
-              return (
-                <button
-                  key={key}
-                  onClick={() => handleKeyboardClick(key)}
-                  className={`
-                    font-bold rounded px-3 py-4 text-sm
-                    ${key.length > 1 ? 'px-4' : 'min-w-[40px]'}
-                    ${status === 'correct' ? 'bg-green-500 text-white' : ''}
-                    ${status === 'present' ? 'bg-yellow-500 text-white' : ''}
-                    ${status === 'absent' ? 'bg-gray-600 text-white' : ''}
-                    ${!status ? 'bg-gray-200' : ''}
-                    hover:opacity-90 transition-opacity
-                  `}
-                >
-                  {key}
-                </button>
-              );
-            })}
-          </div>
-        ))}
+        <div className="w-full max-w-lg mt-2">
+          {KEYBOARD_ROWS.map((row, rowIndex) => (
+            <div key={rowIndex} className="flex justify-center gap-1 mb-1">
+              {row.map((key) => {
+                const status = usedLetters[key];
+                return (
+                  <button
+                    key={key}
+                    onClick={() => handleKeyboardClick(key)}
+                    className={`
+                      font-bold rounded px-2 py-3 text-sm
+                      ${key.length > 1 ? 'px-3' : 'min-w-[36px]'}
+                      ${status === 'correct' ? 'bg-green-500 text-white' : ''}
+                      ${status === 'present' ? 'bg-yellow-500 text-white' : ''}
+                      ${status === 'absent' ? 'bg-gray-600 text-white' : ''}
+                      ${!status ? 'bg-gray-200' : ''}
+                      hover:opacity-90 transition-opacity
+                    `}
+                  >
+                    {key}
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
