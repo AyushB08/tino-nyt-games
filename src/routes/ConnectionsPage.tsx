@@ -59,11 +59,16 @@ const ConnectionsPage: React.FC = () => {
   };
 
   const renderGrid = (): React.ReactElement => (
-    <div className="connections-grid">
+    <div className="grid grid-cols-4 gap-4 mt-6">
       {tiles.map((word, index) => (
         <div
           key={index}
-          className={`connections-tile ${selectedTiles.includes(word) ? 'selected' : ''}`}
+          className={`
+            w-60 h-32 text-center flex items-center justify-center text-2xl font-bold rounded-lg
+            transition-all duration-200 ease-in-out cursor-pointer
+            ${selectedTiles.includes(word) ? 'bg-gray-300 text-gray-900 shadow-md' : 'bg-gray-100 border border-gray-200'}
+            hover:bg-gray-300 hover:text-gray-900 hover:shadow-md
+          `}
           onClick={() => selectTile(word)}
         >
           {word}
@@ -73,38 +78,55 @@ const ConnectionsPage: React.FC = () => {
   );
 
   const renderCompletedGroups = (): React.ReactElement => (
-    <div id="completed-groups">
+    <div className="grid grid-cols-1 gap-4 mt-6">
       {completed.map((group, index) => (
-        <div key={index} className="completed-group" style={{ background: group.color }}>
-          <div className="completed-title">{group.name}</div>
-          {group.words.map((word, idx) => (
-            <div key={idx} className="connections-tile">
-              {word}
-            </div>
-          ))}
+        <div key={index} className="p-4 rounded-lg shadow-md" style={{ background: group.color }}>
+          <div className="text-lg font-semibold mb-2">{group.name}</div>
+          <div className="flex gap-4">
+            {group.words.map((word, idx) => (
+              <div
+                key={idx}
+                className="w-60 h-32 text-center flex items-center justify-center text-2xl font-bold rounded-lg bg-white bg-opacity-80"
+              >
+                {word}
+              </div>
+            ))}
+          </div>
         </div>
       ))}
     </div>
   );
 
   const renderAttempts = (): React.ReactElement => (
-    <div id="attempts-container">
+    <div className="flex justify-center gap-2 mt-6">
       {[...Array(attemptsLeft)].map((_, index) => (
-        <div key={index} className="connections-dot"></div>
+        <div key={index} className="w-4 h-4 bg-gray-300 rounded-full"></div>
       ))}
     </div>
   );
 
   return (
-    <div className="connections-container">
-      <div className="connections-title">TinoConnections</div>
-      {renderCompletedGroups()}
-      {renderGrid()}
-      <div className="button-container">
-        <button className="button" onClick={initializeGame}>Shuffle</button>
-        <button className="button" onClick={submitSelection}>Submit</button>
+    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="flex flex-col items-center p-8 bg-white rounded-2xl shadow-xl">
+        <h1 className="text-3xl font-bold mb-6">TinoConnections</h1>
+        {renderCompletedGroups()}
+        {renderGrid()}
+        <div className="flex gap-4 mt-6">
+          <button
+            className="px-6 py-2 bg-gray-200 rounded-lg font-semibold hover:bg-gray-300 transition-all duration-200"
+            onClick={initializeGame}
+          >
+            Shuffle
+          </button>
+          <button
+            className="px-6 py-2 bg-blue-500 text-white rounded-lg font-semibold bg-gray-600 hover:bg-gray-500 transition-all duration-200"
+            onClick={submitSelection}
+          >
+            Submit
+          </button>
+        </div>
+        {renderAttempts()}
       </div>
-      {renderAttempts()}
     </div>
   );
 };
