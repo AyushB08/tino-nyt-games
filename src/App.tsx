@@ -149,14 +149,8 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <Router>
-        <div className="min-h-screen bg-gray-100">
-          <motion.div 
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            <Navbar />
-          </motion.div>
+        <div className="w-screen h-screen bg-gray-100 overflow-hidden">
+          <Navbar />
           <main className="h-screen">
             <Routes>
               <Route path="/" element={<Home />} />
