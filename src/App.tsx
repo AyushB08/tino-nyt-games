@@ -14,7 +14,7 @@ function Home() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h1 className="text-3xl font-bold mb-4">Welcome to Tino NYT Games</h1>
+      <h1 className="text-3xl font-bold mb-4">Welcome to Tino Games</h1>
       <div className="space-y-4">
         <motion.div 
           whileHover={{ scale: 1.05 }}

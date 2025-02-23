@@ -9,7 +9,6 @@ const Navbar = () => {
     const storedUser = localStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
   });
-
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -39,10 +38,22 @@ const Navbar = () => {
           headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
         });
         const userData = await res.json();
+
+        await fetch("http://localhost:5000/api/users", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id: userData.id,   
+            name: userData.name,
+            email: userData.email,
+            picture: userData.picture,
+          }),
+        });
+        
         setUser({ ...userData, picture: userData.picture });
         setDropdownOpen(false);
       } catch (error) {
-        console.error("Fetching user info failed:", error);
+        console.error("Fetching user info or backend call failed:", error);
       }
     },
     onError: (error) => console.log("Login Failed:", error),
