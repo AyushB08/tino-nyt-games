@@ -70,7 +70,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full">
+    <nav className="w-full fixed top-0 left-0 z-50 ">
       <div className="max-w-7xl mx-auto px-4 w-full">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
@@ -78,7 +78,11 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center space-x-6">
-            <Link to="/" className="text-gray-700 hover:text-gray-900 text-sm">
+            <Link
+              to="/"
+              className="block py-2 text-sm text-gray-700 hover:text-gray-900"
+              onClick={() => setDropdownOpen(false)}
+            >
               Home
             </Link>
             <Link to="/wordle" className="text-gray-700 hover:text-gray-900 text-sm">
@@ -86,6 +90,13 @@ const Navbar = () => {
             </Link>
             <Link to="/connections" className="text-gray-700 hover:text-gray-900 text-sm">
               Connections
+            </Link>
+            <Link
+              to="/admin"
+              className="block py-2 text-sm text-gray-700 hover:text-gray-900"
+              onClick={() => setDropdownOpen(false)}
+            >
+              Admin
             </Link>
           </div>
 

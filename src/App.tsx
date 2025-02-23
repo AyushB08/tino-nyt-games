@@ -4,12 +4,13 @@ import { motion } from "framer-motion";
 import "./App.css";
 import WordlePage from "./routes/WordlePage.tsx";
 import ConnectionsPage from "./routes/ConnectionsPage.tsx";
+import AdminPage from "./routes/AdminPage.tsx";
 import Navbar from "./components/Navbar";
 
 function Home() {
   return (
     <motion.div 
-      className="flex flex-col items-center"
+      className="flex flex-col items-center justify-center h-full"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -39,7 +40,7 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <Router>
-        <div className="min-h-screen bg-gray-100 min-w-screen">
+        <div className="min-h-screen bg-gray-100">
           <motion.div 
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -47,20 +48,14 @@ function App() {
           >
             <Navbar />
           </motion.div>
-          <div className="w-full h-[calc(100vh-64px)] flex items-center justify-center">
-            <motion.div 
-              className="max-w-screen mx-auto py-6 sm:px-6 lg:px-8"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/wordle" element={<WordlePage />} />
-                <Route path="/connections" element={<ConnectionsPage />} />
-              </Routes>
-            </motion.div>
-          </div>
+          <main className="pt-16 h-screen">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/wordle" element={<WordlePage />} />
+              <Route path="/connections" element={<ConnectionsPage />} />
+              <Route path="/admin" element={<AdminPage />} />
+            </Routes>
+          </main>
         </div>
       </Router>
     </GoogleOAuthProvider>
