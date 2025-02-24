@@ -70,75 +70,73 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full fixed top-0 left-0 z-50 p-4">
+    <nav className="w-full fixed top-0 left-0 z-50 ">
       <div className="max-w-7xl mx-auto px-4 w-full">
-        <div className="rounded-lg shadow-lg bg-white border border-gray-100">
-          <div className="flex justify-between h-16 items-center px-6">
-            <div className="flex items-center">
-              <img className="h-8 w-auto" src={tinovationLogo} alt="Tinovation" />
-            </div>
+        <div className="flex justify-between h-16 items-center">
+          <div className="flex items-center">
+            <img className="h-8 w-auto" src={tinovationLogo} alt="Tinovation" />
+          </div>
 
-            <div className="flex items-center space-x-6">
-              <Link
-                to="/"
-                className="block py-2 text-sm text-gray-700 hover:text-gray-900"
-                onClick={() => setDropdownOpen(false)}
-              >
-                Home
-              </Link>
-              <Link to="/wordle" className="text-gray-700 hover:text-gray-900 text-sm">
-                Wordle
-              </Link>
-              <Link to="/connections" className="text-gray-700 hover:text-gray-900 text-sm">
-                Connections
-              </Link>
-              <Link
-                to="/admin"
-                className="block py-2 text-sm text-gray-700 hover:text-gray-900"
-                onClick={() => setDropdownOpen(false)}
-              >
-                Admin
-              </Link>
-            </div>
+          <div className="flex items-center space-x-6">
+            <Link
+              to="/"
+              className="block py-2 text-sm text-gray-700 hover:text-gray-900"
+              onClick={() => setDropdownOpen(false)}
+            >
+              Home
+            </Link>
+            <Link to="/wordle" className="text-gray-700 hover:text-gray-900 text-sm">
+              Wordle
+            </Link>
+            <Link to="/connections" className="text-gray-700 hover:text-gray-900 text-sm">
+              Connections
+            </Link>
+            <Link
+              to="/admin"
+              className="block py-2 text-sm text-gray-700 hover:text-gray-900"
+              onClick={() => setDropdownOpen(false)}
+            >
+              Admin
+            </Link>
+          </div>
 
-            <div className="relative" ref={dropdownRef}>
-              <button 
-                onClick={() => setDropdownOpen(!dropdownOpen)} 
-                className="rounded-full hover:ring-2 hover:ring-gray-200 transition-all duration-200 p-0.5"
-              >
-                <img
-                  className="h-8 w-8 rounded-full"
-                  src={user?.picture || guestProfile}
-                  alt="Profile"
-                />
-              </button>
+          <div className="relative" ref={dropdownRef}>
+            <button 
+              onClick={() => setDropdownOpen(!dropdownOpen)} 
+              className="rounded-full hover:ring-2 hover:ring-gray-200 transition-all duration-200 p-0.5"
+            >
+              <img
+                className="h-8 w-8 rounded-full"
+                src={user?.picture || guestProfile}
+                alt="Profile"
+              />
+            </button>
 
-              {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-36 bg-white rounded-lg shadow-lg py-1 border border-gray-100 transform transition-all duration-200 ease-out scale-95 origin-top-right">
-                  {user ? (
-                    <>
-                      <div className="px-3 py-2 border-b border-gray-50">
-                        <p className="text-sm font-medium text-gray-900 truncate">{user.name}</p>
-                        <p className="text-xs text-gray-500 truncate">{user.email}</p>
-                      </div>
-                      <button
-                        onClick={logout}
-                        className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-gray-50 transition-colors duration-150"
-                      >
-                        Sign Out
-                      </button>
-                    </>
-                  ) : (
+            {dropdownOpen && (
+              <div className="absolute right-0 mt-2 w-36 bg-white rounded-lg shadow-lg py-1 border border-gray-100 transform transition-all duration-200 ease-out scale-95 origin-top-right">
+                {user ? (
+                  <>
+                    <div className="px-3 py-2 border-b border-gray-50">
+                      <p className="text-sm font-medium text-gray-900 truncate">{user.name}</p>
+                      <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                    </div>
                     <button
-                      onClick={handleLogin}
-                      className="w-full text-left px-3 py-2 text-sm hover:bg-gray-50 transition-colors duration-150"
+                      onClick={logout}
+                      className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-gray-50 transition-colors duration-150"
                     >
-                      Sign In with Google
+                      Sign Out
                     </button>
-                  )}
-                </div>
-              )}
-            </div>
+                  </>
+                ) : (
+                  <button
+                    onClick={handleLogin}
+                    className="w-full text-left px-3 py-2 text-sm hover:bg-gray-50 transition-colors duration-150"
+                  >
+                    Sign In with Google
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

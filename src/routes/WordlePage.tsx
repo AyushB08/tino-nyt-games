@@ -25,8 +25,8 @@ const Popup: React.FC<PopupProps> = ({ message, isVisible }) => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed top-16 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-90 text-white px-6 py-3 rounded-lg shadow-lg animate-fade-in">
-      <p className="text-center font-semibold text-sm">{message}</p>
+    <div className="fixed top-16 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-80 text-white px-6 py-3 rounded-lg shadow-lg animate-fade-in">
+      <p className="text-center font-bold">{message}</p>
     </div>
   );
 };
@@ -160,15 +160,15 @@ const WordleGame: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="flex flex-col items-center gap-8 p-8 bg-white rounded-2xl shadow-xl">
+    <div className=" flex items-center justify-center h-full">
+      <div className="flex flex-col items-center gap-4 p-4 max-h-screen">
         <Popup message={popupMessage} isVisible={showPopup} />
         
-        <div className="grid gap-3">
+        <div className="grid gap-1">
           {Array(MAX_GUESSES).fill(null).map((_, rowIndex) => (
             <div 
               key={rowIndex}
-              className={`grid grid-cols-5 gap-3 ${rowIndex === currentRow && shake ? 'animate-shake' : ''}`}
+              className={`grid grid-cols-5 gap-1 ${rowIndex === currentRow && shake ? 'animate-shake' : ''}`}
             >
               {Array(WORD_LENGTH).fill(null).map((_, colIndex) => {
                 const letter = rowIndex === currentRow 
@@ -180,12 +180,11 @@ const WordleGame: React.FC = () => {
                   <div
                     key={colIndex}
                     className={`
-                      w-16 h-16 flex items-center justify-center text-3xl font-bold rounded-lg
-                      transition-all duration-300 ease-in-out
-                      ${!letter ? 'bg-gray-100 border border-gray-200' : ''}
-                      ${status === 'correct' ? 'bg-green-500 text-white shadow-lg' : ''}
-                      ${status === 'present' ? 'bg-yellow-500 text-white shadow-lg' : ''}
-                      ${status === 'absent' ? 'bg-gray-600 text-white shadow-lg' : ''}
+                      w-12 h-12 border-2 flex items-center justify-center text-xl font-bold
+                      ${!letter ? 'border-gray-300' : 'border-gray-400'}
+                      ${status === 'correct' ? 'bg-green-500 text-white border-green-500' : ''}
+                      ${status === 'present' ? 'bg-yellow-500 text-white border-yellow-500' : ''}
+                      ${status === 'absent' ? 'bg-gray-600 text-white border-gray-600' : ''}
                     `}
                   >
                     {letter}
@@ -196,9 +195,9 @@ const WordleGame: React.FC = () => {
           ))}
         </div>
 
-        <div className="w-full max-w-2xl mt-4">
+        <div className="w-full max-w-lg mt-2">
           {KEYBOARD_ROWS.map((row, rowIndex) => (
-            <div key={rowIndex} className="flex justify-center gap-2 mb-2">
+            <div key={rowIndex} className="flex justify-center gap-1 mb-1">
               {row.map((key) => {
                 const status = usedLetters[key];
                 return (
@@ -206,13 +205,13 @@ const WordleGame: React.FC = () => {
                     key={key}
                     onClick={() => handleKeyboardClick(key)}
                     className={`
-                      font-bold rounded-lg px-4 py-5 text-lg
-                      transition-all duration-200 ease-in-out
-                      ${key.length > 1 ? 'px-6' : 'min-w-[50px]'}
-                      ${status === 'correct' ? 'bg-green-500 text-white shadow-md' : ''}
-                      ${status === 'present' ? 'bg-yellow-500 text-white shadow-md' : ''}
-                      ${status === 'absent' ? 'bg-gray-600 text-white shadow-md' : ''}
-                      ${!status ? 'bg-gray-200 hover:bg-gray-300 shadow-sm' : ''}
+                      font-bold rounded px-2 py-3 text-sm
+                      ${key.length > 1 ? 'px-3' : 'min-w-[36px]'}
+                      ${status === 'correct' ? 'bg-green-500 text-white' : ''}
+                      ${status === 'present' ? 'bg-yellow-500 text-white' : ''}
+                      ${status === 'absent' ? 'bg-gray-600 text-white' : ''}
+                      ${!status ? 'bg-gray-200' : ''}
+                      hover:opacity-90 transition-opacity
                     `}
                   >
                     {key}
