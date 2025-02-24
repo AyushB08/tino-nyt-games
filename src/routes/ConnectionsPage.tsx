@@ -1,3 +1,4 @@
+// Update: fetch call to increment connectionsPts
 import React, { useState, useEffect } from 'react';
 
 type Group = {
@@ -19,6 +20,25 @@ const ConnectionsPage: React.FC = () => {
   const [completed, setCompleted] = useState<Group[]>([]);
   const [attemptsLeft, setAttemptsLeft] = useState<number>(4);
 
+  const incrementConnectionsPts = async () => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      try {
+        const response = await fetch(`http://localhost:5000/api/users/${user.id}/increase-connections-pts`, {
+          method: 'PATCH'
+        });
+        if (!response.ok) {
+          console.error(`Error incrementing points: ${response.status}`);
+        } else {
+          console.log('Connections points incremented successfully.');
+        }
+      } catch (error) {
+        console.error('Failed to increment connections points:', error);
+      }
+    }
+  };
+
   useEffect(() => {
     initializeGame();
   }, []);
@@ -37,7 +57,7 @@ const ConnectionsPage: React.FC = () => {
     );
   };
 
-  const submitSelection = (): void => {
+  const submitSelection = async (): Promise<void> => {
     if (selectedTiles.length !== 4 || attemptsLeft === 0) return;
 
     const matchedGroup = groups.find(group => selectedTiles.every(word => group.words.includes(word)));
@@ -45,6 +65,7 @@ const ConnectionsPage: React.FC = () => {
     if (matchedGroup && !completed.some(g => g.name === matchedGroup.name)) {
       setCompleted([...completed, matchedGroup]);
       setTiles(prevTiles => prevTiles.filter(word => !matchedGroup.words.includes(word)));
+      await incrementConnectionsPts();
     } else {
       setAttemptsLeft(prevAttempts => prevAttempts - 1);
       if (attemptsLeft === 1) revealAnswers();
